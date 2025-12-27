@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Новости — ВЦ РЭУ{% endblock %}
+
+{% block content %}
+  <section class="page-wrap" style="padding: 24px 0;">
+    <h1 style="margin:0 0 12px;">НОВОСТИ</h1>
+
+    <form method="get" style="margin: 0 0 16px;">
+      <input type="search" name="q" value="{{ q|default:'' }}" placeholder="Поиск по новостям"
+             style="width:min(520px,100%); padding:10px 12px; border-radius:10px; border:1px solid #ddd;">
+      <button type="submit" style="padding:10px 14px; border-radius:10px; border:1px solid #111; background:#fff; cursor:pointer;">
+        Найти
+      </button>
+    </form>
+
+    {% if news_list %}
+      <div style="display:grid; gap:12px;">
+        {% for n in news_list %}
+          <article style="padding:14px; border:1px solid rgba(0,0,0,.08); border-radius:14px; background:#fff;">
+            <div style="font-size:12px; opacity:.7; margin-bottom:6px;">
+              {{ n.published_at|date:"d.m.Y H:i" }}
+            </div>
+            <h2 style="margin:0 0 6px; font-size:18px;">
+              <a href="{{ n.get_absolute_url }}" style="color:#111; text-decoration:none;">
+                {{ n.title }}
+              </a>
+            </h2>
+            {% if n.lead %}
+              <p style="margin:0; opacity:.85;">{{ n.lead }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Новостей пока нет.</p>
+    {% endif %}
+  </section>
+{% endblock %}

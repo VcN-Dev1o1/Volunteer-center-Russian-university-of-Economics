@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ruU">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}ВЦ РЭУ{% endblock %}</title>
+  {% load static %}
+  <script defer src="{% static 'core/js/hero.js' %}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'core/css/fonts.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
+</head>
+<body>
+
+  <div class="page-wrap">
+    {% include "partials/header.html" %}
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    {% include "partials/footer.html" %}
+  </div>
+
+</body>
+</html>

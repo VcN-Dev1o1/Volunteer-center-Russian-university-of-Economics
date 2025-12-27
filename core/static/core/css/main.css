@@ -1,0 +1,379 @@
+@import "hero.css";
+@import "cards.css";
+
+/* =========================
+   BASE
+   ========================= */
+
+:root{
+  --container-max: auto;
+  --container-pad: clamp(0px, 2.2vw, 0px);
+
+  /* hero-card tuning */
+  --hero-card-w: 320px;
+  --hero-card-maxw: 520px;
+  --hero-card-minh: auto;
+  --hero-card-maxh: none;
+  --hero-title-lines: 2;
+  --hero-lead-lines: 4;
+}
+
+html, body {
+  margin: 0;
+  font-family: "Gogh", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  background: #fff;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+.page-wrap{
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header{
+  line-height: 1;
+  background: #fff;
+  padding: 20px 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  /* фиксированную высоту лучше не держать — она ломает мобилу */
+}
+
+.header__row{
+  display:flex;
+  align-items:center;
+  gap: 20px;
+}
+
+.header-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.logo{
+  display:flex;
+  margin:0;
+  align-items:center;
+}
+
+.logo-img{
+  height: 28px;
+  width: auto;
+  display:block;
+  transform: translateY(2px);
+}
+
+.menu{
+  margin-left: 50px;
+  display:flex;
+  gap: 30px;
+  font-size: 14px;
+}
+
+.menu a{
+  transform: translateY(1px);
+  text-decoration:none;
+  color:#111;
+}
+
+.icon-btn{
+  transform: translateY(-1px);
+  width: 33px;
+  height: 33px;
+  border-radius: 999px;
+  border: 1px solid #111;
+  background: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.icon-btn svg{ display:block; }
+
+.login-btn{
+  transform: translateY(-1px);
+  padding: 5.5px 22px;
+  border-radius: 999px;
+  border: 1px solid #111;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  /* margin-left:auto НЕ нужно — это уже делает .header-actions */
+}
+
+/* мобильное меню (выпадашка) */
+.mobile-menu{
+  background:#fff;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  display:none; /* по умолчанию скрыто */
+}
+
+.mobile-menu__inner{
+  display:flex;
+  flex-direction:column;
+  padding: 10px 0 14px;
+  gap: 10px;
+}
+
+.mobile-menu a{
+  color:#111;
+  text-decoration:none;
+  font-size: 14px;
+}
+
+/* бургер: по умолчанию скрыт на десктопе */
+.burger-btn{
+  display:none;
+}
+
+/* =========================
+   HERO (SLIDER)
+   ========================= */
+
+.hero{
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  height: 720px;
+  background: radial-gradient(circle at top, #222 0, #000 60%);
+
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* трек слайдера */
+.hero-slides{
+  position:absolute;
+  inset:0;
+  display:flex;
+  width:100%;
+  height:100%;
+  transform: translate3d(0,0,0);
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.hero-slide{
+  flex: 0 0 100%;
+  height:100%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* overlay поверх фона */
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index: 1;
+}
+
+/* карточка */
+.hero-card{
+  position:absolute;
+  top: 32px;
+  left: 20px;
+  z-index: 2;
+
+  width: min(var(--hero-card-w), calc(100vw - 48px));
+  max-width: var(--hero-card-maxw);
+  min-height: var(--hero-card-minh);
+  max-height: var(--hero-card-maxh);
+
+  padding: 18px 20px 20px;
+  border-radius: 18px;
+  box-sizing: border-box;
+  overflow:hidden;
+
+  background: rgba(255, 255, 255, 0.14);
+  color:#fff;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.hero-card.is-changing{
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.hero-card__meta{
+  margin: 0 0 8px;
+  font-size: 11px;
+  opacity: 0.8;
+  overflow-wrap:anywhere;
+  word-break: break-word;
+  hyphens:auto;
+}
+
+.hero-card__title{
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 700;
+
+  overflow-wrap:anywhere;
+  word-break: break-word;
+  hyphens:auto;
+
+  display: -webkit-box;
+  -webkit-line-clamp: var(--hero-title-lines);
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+}
+
+.hero-card__lead{
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.4;
+
+  overflow-wrap:anywhere;
+  word-break: break-word;
+  hyphens:auto;
+
+  display: -webkit-box;
+  -webkit-line-clamp: var(--hero-lead-lines);
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+}
+
+.hero-card__btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding: 6px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background:#fff;
+  color:#111;
+  white-space:nowrap;
+}
+
+/* стрелки */
+.hero-arrow{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  z-index: 3;
+
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.35);
+  color:#fff;
+  cursor:pointer;
+}
+
+.hero-arrow--prev{ left: 14px; }
+.hero-arrow--next{ right: 14px; }
+
+/* точки */
+.hero-bottom{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:18px;
+  z-index:3;
+  display:flex;
+  justify-content:center;
+}
+
+.hero-dots{
+  display:flex;
+  gap:6px;
+}
+
+.hero-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255,255,255,0.35);
+  cursor:pointer;
+  padding:0;
+}
+
+.hero-dot--active{
+  width: 22px;
+  background:#fff;
+}
+
+/* уважение к reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .hero-slides{ transition: none; }
+  .hero-card{ transition: none; }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 920px){
+  /* header */
+  .menu{ display:none; }
+  .burger-btn{ display:flex; }
+
+  .header{
+    padding: 12px 14px;
+  }
+
+  .logo-img{
+    height: 26px;
+    transform: translateY(1px);
+  }
+
+  .login-btn{
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+
+  /* hero */
+  .hero{
+    margin: 0 0 32px;
+    height: 420px;
+  }
+
+  .hero-arrow{
+    display:none;
+  }
+
+  :root{
+    --hero-card-w: 100%;
+    --hero-card-maxw: 100%;
+    --hero-lead-lines: 5;
+  }
+
+  .hero-card{
+    left: 24px;
+    right: 24px;
+    width: auto; /* чтобы работали left/right */
+  }
+}
+
+@media (min-width: 920px){
+  .mobile-menu{ display:none; }
+}

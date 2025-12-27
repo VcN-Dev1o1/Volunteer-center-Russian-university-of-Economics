@@ -1,0 +1,32 @@
+{% load static %}
+
+<section class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides">
+    {% for n in hero_news %}
+      <article class="hero-slide{% if forloop.first %} is-active{% endif %}"
+        style="background-image:url('{% if n.image %}{{ n.image.url }}{% else %}{% static 'core/img/hero/fallback.jpg' %}{% endif %}')"
+        data-date="{{ n.published_at|date:'d.m.y' }}"
+        data-editor="{{ n.editor_name|default:'ВЦ РЭУ'|escape }}"
+        data-title="{{ n.title|escape }}"
+        data-lead="{{ n.lead|default:''|escape }}"
+        data-link="{{ n.get_absolute_url }}">
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-card" id="heroCard">
+    <p class="hero-card__meta" id="heroMeta"></p>
+    <h2 class="hero-card__title" id="heroTitle"></h2>
+    <p class="hero-card__lead" id="heroLead"></p>
+    <a class="hero-card__btn" id="heroBtn" href="#">Подробнее</a>
+  </div>
+
+  <button class="hero-arrow hero-arrow--prev" type="button" aria-label="Предыдущий" id="heroPrev">‹</button>
+  <button class="hero-arrow hero-arrow--next" type="button" aria-label="Следующий" id="heroNext">›</button>
+
+  <div class="hero-bottom">
+    <div class="hero-dots" id="heroDots"></div>
+  </div>
+</section>

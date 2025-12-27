@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Страница в разработке</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #fff;
+    }
+    .page {
+      min-height: 100vh;
+      background: url("{% static 'core/img/404/placeholder.png' %}") center / cover no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <div class="page"></div>
+</body>
+</html>

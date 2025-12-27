@@ -1,0 +1,49 @@
+{% load static %}
+<header class="header">
+  <div class="page-wrap header__row">
+
+    <a class="logo" href="{% url 'core:index' %}">
+      <img class="logo-img" src="{% static 'core/img/logo.svg' %}" alt="ВЦРЭУ">
+    </a>
+
+    <nav class="menu" aria-label="Основное меню">
+      <a href="{% url 'core:about' %}">О НАС</a>
+      <a href="{% url 'core:checklist' %}">ЧЕК-ЛИСТ</a>
+      <a href="{% url 'core:team' %}">КОМАНДА</a>
+      <a href="{% url 'core:graduates' %}">НАШИ ВЫПУСКНИКИ</a>
+      <a href="{% url 'core:dobro' %}">ДОБРО.РФ</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" type="button" aria-label="Поиск" title="Поиск">
+        <!-- простая иконка лупы -->
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm6.1-1.4 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <button class="icon-btn burger-btn" type="button"
+              aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu"
+              title="Меню">
+        <!-- иконка "бургер" -->
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <button class="login-btn" type="button">ВОЙТИ</button>
+    </div>
+
+  </div>
+
+  <!-- Мобильное меню (открывается бургером) -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="page-wrap mobile-menu__inner">
+      <a href="{% url 'core:about' %}">О НАС</a>
+      <a href="{% url 'core:checklist' %}">ЧЕК-ЛИСТ</a>
+      <a href="{% url 'core:team' %}">КОМАНДА</a>
+      <a href="{% url 'core:graduates' %}">НАШИ ВЫПУСКНИКИ</a>
+      <a href="{% url 'core:dobro' %}">ДОБРО.РФ</a>
+    </div>
+  </div>
+</header>

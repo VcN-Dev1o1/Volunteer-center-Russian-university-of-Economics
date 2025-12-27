@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Hairline.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Thin.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Book.woff2") format("woff2");
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Heavy.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gogh";
+  src: url("/static/core/fonts/Gogh-Black.woff2") format("woff2");
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+}
+
+html, body {
+  font-family: "Gogh", system-ui, -apple-system, Arial, sans-serif;
+}
