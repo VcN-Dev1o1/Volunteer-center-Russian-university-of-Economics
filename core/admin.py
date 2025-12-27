@@ -11,7 +11,6 @@ from .models import (
     SiteConfig,
     News,
     NewsBlock,
-    SiteSettings,
 )
 
 
@@ -28,12 +27,10 @@ class VolunteerOfMonthAdmin(admin.ModelAdmin):
     list_filter = ("year", "month")
     autocomplete_fields = ("volunteer",)
 
-
 class NewsBlockInline(admin.TabularInline):
     model = NewsBlock
     extra = 0
     max_num = 10
-
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
@@ -54,7 +51,6 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ("title", "is_published", "is_pinned", "pin_until", "published_at")
     list_filter = ("is_published", "is_pinned")
     search_fields = ("title", "lead", "body", "editor_name")
-
 
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
@@ -84,6 +80,9 @@ class SiteConfigAdmin(admin.ModelAdmin):
     list_display = ("key", "title")
     search_fields = ("key", "title")
 
-@admin.register(SiteSettings)
-class SiteSettingsAdmin(admin.ModelAdmin):
-    list_display = ("id", "hero_autoplay_delay", "university_url", "smedia_url")
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ("title", "is_published", "published_at", "is_pinned", "pin_until")
+    list_filter = ("is_published", "is_pinned")
+    search_fields = ("title", "lead", "body")
+    ordering = ("-published_at", "-created_at")
+    date_hierarchy = "published_at"

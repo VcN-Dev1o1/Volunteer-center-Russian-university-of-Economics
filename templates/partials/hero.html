@@ -1,6 +1,7 @@
 {% load static %}
 
-<section class="hero" id="hero" data-rotate="{{ site_settings.hero_autoplay_delay|default:8 }}">  <div class="hero-slides" id="heroSlides">
+<section class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides">
     {% for n in hero_news %}
       <article class="hero-slide{% if forloop.first %} is-active{% endif %}"
         style="background-image:url('{% if n.image %}{{ n.image.url }}{% else %}{% static 'core/img/hero/fallback.jpg' %}{% endif %}')"

@@ -1,17 +1,5 @@
 <footer class="footer">
   <div class="page-wrap">
     <p>© Волонтерский центр РЭУ им. Г.В. Плеханова</p>
-    {% if site_settings %}
-      {% if site_settings.university_url or site_settings.smedia_url %}
-        <div class="lower-bar">
-          {% if site_settings.university_url %}
-            <a href="{{ site_settings.university_url }}" target="_blank" rel="noopener noreferrer">ПЕРЕЙТИ НА САЙТ УНИВЕРСИТЕТА</a>
-          {% endif %}
-          {% if site_settings.smedia_url %}
-            <a href="{{ site_settings.smedia_url }}" target="_blank" rel="noopener noreferrer">ПЕРЕЙТИ НА САЙТ С-МЕДИА</a>
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endif %}
   </div>
 </footer>

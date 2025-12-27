@@ -30,25 +30,13 @@
 
     {% if news.image %}
       <figure style="margin: 18px 0 18px;">
-        <img class="news-image" src="{{ news.image.url }}" alt="{{ news.title|escape }}" loading="lazy">
+        <img src="{{ news.image.url }}" alt="{{ news.title|escape }}"
+             style="width:100%; max-height:520px; object-fit:cover; border-radius:18px; display:block;">
       </figure>
     {% endif %}
 
-    <div class="news-content">
+    <div class="news-body" style="max-width: 78ch; font-size: 15px; line-height: 1.7;">
       {{ news.body|linebreaks }}
     </div>
-    {% if news.blocks.exists %}
-      {% for block in news.blocks.all %}
-        {% if block.block_type == "text" %}
-          <div class="news-block news-block--text">
-            {{ block.text|linebreaks }}
-          </div>
-        {% elif block.block_type == "image" and block.image %}
-          <figure class="news-block news-block--image">
-            <img src="{{ block.image.url }}" alt="{{ news.title|escape }}" loading="lazy">
-          </figure>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
   </article>
 {% endblock %}
