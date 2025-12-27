@@ -20,6 +20,12 @@
 
   let index = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
   let isAnimating = false;
+  let autoTimer = null;
+
+  const rotateSeconds = Number(hero.dataset.rotate || 0);
+  const rotateDelay = Number.isFinite(rotateSeconds) && rotateSeconds > 0
+    ? rotateSeconds * 1000
+    : 0;
 
   // dots
   const dots = slides.map((_, i) => {
@@ -66,6 +72,7 @@
     isAnimating = true;
     render();
     window.setTimeout(() => { isAnimating = false; }, 700);
+    resetAuto();
   }
 
   function next() { goTo(index + 1); }
@@ -85,5 +92,18 @@
     dx < 0 ? next() : prev();
   });
 
+  function resetAuto() {
+    if (!rotateDelay) return;
+    if (autoTimer) {
+      window.clearInterval(autoTimer);
+      autoTimer = null;
+    }
+    autoTimer = window.setInterval(next, rotateDelay);
+  }
+
+  hero.addEventListener('mouseenter', () => autoTimer && window.clearInterval(autoTimer));
+  hero.addEventListener('mouseleave', resetAuto);
+
   render();
+  resetAuto();
 })();

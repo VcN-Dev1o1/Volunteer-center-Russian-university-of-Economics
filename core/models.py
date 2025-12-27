@@ -211,6 +211,13 @@ class NewsBlock(models.Model):
 
 class SiteSettings(models.Model):
     not_found_image = models.ImageField(upload_to="site/", blank=True, null=True)
+    hero_autoplay_delay = models.PositiveSmallIntegerField(
+        "Время смены новостей в слайдере (сек.)",
+        default=8,
+        help_text="Интервал автоперелистывания в секундах.",
+    )
+    university_url = models.URLField("Сайт университета", blank=True)
+    smedia_url = models.URLField("Сайт С-Медиа", blank=True)
 
     def __str__(self):
         return "Site settings"

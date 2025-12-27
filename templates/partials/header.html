@@ -15,14 +15,13 @@
     </nav>
 
     <div class="header-actions">
-      <button class="icon-btn" type="button" aria-label="Поиск" title="Поиск">
-        <!-- простая иконка лупы -->
+      <button class="icon-btn js-search-toggle" type="button" aria-label="Поиск" title="Поиск" aria-expanded="false" aria-controls="search-panel">        <!-- простая иконка лупы -->
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
           <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm6.1-1.4 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
 
-      <button class="icon-btn burger-btn" type="button"
+      <button class="icon-btn burger-btn js-menu-toggle" type="button"
               aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu"
               title="Меню">
         <!-- иконка "бургер" -->
@@ -44,6 +43,20 @@
       <a href="{% url 'core:team' %}">КОМАНДА</a>
       <a href="{% url 'core:graduates' %}">НАШИ ВЫПУСКНИКИ</a>
       <a href="{% url 'core:dobro' %}">ДОБРО.РФ</a>
+      <a href="{% url 'core:news_list' %}">НОВОСТИ</a>
+    </div>
+  </div>
+
+  <div class="search-panel" id="search-panel" hidden>
+    <div class="page-wrap search-panel__inner">
+      <form class="search-form" action="{% url 'core:news_list' %}" method="get" role="search">
+        <label class="search-form__label" for="site-search">Поиск по новостям</label>
+        <div class="search-form__row">
+          <input class="search-form__input" type="search" id="site-search" name="q" placeholder="Введите запрос" autocomplete="off" value="{{ request.GET.q|default:'' }}">
+          <button class="search-form__submit" type="submit">Найти</button>
+        </div>
+      </form>
+      <button class="search-panel__close js-search-toggle" type="button" aria-label="Закрыть поиск">✕</button>
     </div>
   </div>
 </header>

@@ -17,6 +17,12 @@ def handler404(request, exception):
 def handler500(request):
     return render(request, "errors/500.html", {"site_settings": _settings_obj()}, status=500)
 
+def handler400(request, exception):
+    return render(request, "errors/400.html", {"site_settings": _settings_obj()}, status=400)
+
+def handler403(request, exception):
+    return render(request, "errors/403.html", {"site_settings": _settings_obj()}, status=403)
+
 HERO_LIMIT = 4
 
 def index(request):
